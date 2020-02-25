@@ -5,7 +5,6 @@ import ImGallery from './components/gallery.js';
 
 
 function App() {
-  addImages();
   return (
 
     <div className="App">
