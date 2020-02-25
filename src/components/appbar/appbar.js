@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+
 const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
@@ -17,8 +18,9 @@ const useStyles = makeStyles(theme => ({
         flexGrow: 1,
     },
 }));
-function MenuAppBar() {
-    const classes = useStyles;
+export default function MenuAppBar() {
+    const classes = useStyles();
+
     return (
         <div className={classes.root}>
             <AppBar position="static">
@@ -27,12 +29,15 @@ function MenuAppBar() {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" className={classes.title}>
-                        News
-          </Typography>
+                        MEDCYPHER
+                        <img src="http://clipartmag.com/images/picture-of-stethoscope-20.png" classname={classes.title} height="40px" alt="this is car image" />
+
+
+                    </Typography>
+
                     <Button color="inherit">Login</Button>
                 </Toolbar>
             </AppBar>
         </div>
     );
 }
-export default MenuAppBar;
