@@ -1,24 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Gallery from 'react-grid-gallery';//https://www.npmjs.com/package/react-grid-gallery
-import testImage from '../images/testimages/science-in-hd-4pM4nhHyo9M-unsplash.jpg'
+//import useAxios from 'axios-hooks'
 let images = [];
-async function addImages() {
-    console.log("adding images");
-    for (let i = 0; i < 67; i++) {
+var doneLoading = false;
+function getData(data) {
+    console.log("Parsing through data");
+    for (let i = 0; i < data.length; i++) {
         images[i] = {
-            src: "http://www.gannett-cdn.com/-mm-/d415e49dbee251019f24a0ea55f95947a2bb1072/c=29-0-425-298&r=x404&c=534x401/local/-/media/2016/01/02/DetroitFreePress/DetroitFreePress/635873333613566290-surgery-ThinkstockPhotos-470454993.jpg",
-            thumbnail: "http://www.gannett-cdn.com/-mm-/d415e49dbee251019f24a0ea55f95947a2bb1072/c=29-0-425-298&r=x404&c=534x401/local/-/media/2016/01/02/DetroitFreePress/DetroitFreePress/635873333613566290-surgery-ThinkstockPhotos-470454993.jpg",
-            thumbnailWidth: 320,
-            thumbnailHeight: 212,
-            tags: [{ value: "Scalpel" }, { value: "Stabby Thing" }, { value: "Pointy" }, {value: "cutty Thing"}],
-            caption: "This tool cuts people open"
+            src: data[i].ImageUri,
+            thumbnail: data[i].ImageUri,
+            thumbnailWidth: Number(data[i].imageWidth),
+            thumbnailHeight: Number(data[i].imageHeight),
+            caption: data[i].captions,
+            tags: [{value: data[i].tags}]
         }
     }
-};
+    doneLoading = true;
+}
 function ImGallery() {
-    addImages();
+    const [isLoading, setIsLoading] = useState(true);
+    const [data, setData] = useState();
+    if (isLoading) {
+        fetch('http://medcypher.azurewebsites.net/api/data/Dr.%20Mohammad')
+            .then(res => res.json())
+            .then(response => {
+                setData(response);
+                getData(response);
+                if (doneLoading)
+                    setIsLoading(false);
+            }).catch(e => { console.log(e) });
+    }
     return (
-        <Gallery images={images} />
+        <div>
+            {isLoading ? <p>Loading Data</p> : <Gallery images={images} />}
+
+        </div>
     );
+
 }
 export default ImGallery;

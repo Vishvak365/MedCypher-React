@@ -34,9 +34,9 @@ export default function MenuAppBar() {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" className={classes.title}>
-
-                        <img src="http://clipartmag.com/images/picture-of-stethoscope-20.png" classname={classes.title} height="40px" alt="this is car image" />
                         MEDCYPHER
+                        <img src="http://clipartmag.com/images/picture-of-stethoscope-20.png" className={classes.title} height="40px" alt=""/>
+
 
                     </Typography>
                     <Search
