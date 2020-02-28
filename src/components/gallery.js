@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Gallery from 'react-grid-gallery';//https://www.npmjs.com/package/react-grid-gallery
-import testImage from '../images/testimages/science-in-hd-4pM4nhHyo9M-unsplash.jpg'
 let images = [];
 var doneLoading = false;
 function getData(data) {

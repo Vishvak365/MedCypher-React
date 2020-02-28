@@ -9,6 +9,7 @@ function App() {
   return (
     <div className="App">
       <MenuAppBar setSearch={setSearch} results={results} />
+      <addForm></addForm>
       <ImGallery search={search}></ImGallery>
     </div>
   );
