@@ -1,13 +1,14 @@
-import React from 'react';
+import React , { useState } from 'react';
 import Gallery from 'react-grid-gallery';//https://www.npmjs.com/package/react-grid-gallery
 import testImage from '../images/testimages/science-in-hd-4pM4nhHyo9M-unsplash.jpg'
 
 
 let images = [];
 let galleryOutput=[]; //This is for displaying what is output to gallery.
-async function addImages() {
-    console.log("adding images");
-    for (let i = 0; i < 67; i++) {
+var doneLoading=false;
+function getData(data) {
+    console.log("Parsing through data");
+    for (let i = 0; i < data.length; i++) {
         images[i] = {
             src: data[i].ImageUri,
             thumbnail: data[i].ImageUri,
