@@ -3,11 +3,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
+import { Button, Modal } from 'semantic-ui-react'
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import { Search } from 'semantic-ui-react';
-
+import AddForm from '../add_image_form.js';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -22,21 +21,22 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function MenuAppBar(props) {
-
     const classes = useStyles();
-
     //Handling onChange event for Search
     const handleChange = (chgEvent) => {
         chgEvent.preventDefault();
         props.setSearch(chgEvent.target.value);
     }
-
     return (
         <div className={classes.root}>
             <AppBar position="static">
                 <Toolbar>
-                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                        <MenuIcon />
+                    <IconButton className={classes.menuButton}>
+                        <Modal trigger={<Button color='green' icon='add' content='Add Cypher' />} centered={false}>
+                            <Modal.Content>
+                                <AddForm />
+                            </Modal.Content>
+                        </Modal>
                     </IconButton>
                     <Typography variant="h6" className={classes.title}>
                         MEDCYPHER
@@ -44,11 +44,9 @@ export default function MenuAppBar(props) {
                     </Typography>
                     <Search
                         onSearchChange={handleChange}
-                        //value={props.search}
                     />
-                    <Button color="inherit">Login</Button>
                 </Toolbar>
             </AppBar>
-        </div>
+        </div >
     );
 }
