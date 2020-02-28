@@ -4,6 +4,7 @@ import testImage from '../images/testimages/science-in-hd-4pM4nhHyo9M-unsplash.j
 
 
 let images = [];
+let galleryOutput=[]; //This is for displaying what is output to gallery.
 async function addImages() {
     console.log("adding images");
     for (let i = 0; i < 67; i++) {
@@ -33,7 +34,7 @@ async function filterImages(searchFilter){
     //let tagsTogether=''; This string will concatenate all the tags together so that using indexOf will return
                         // true if the search input contains any of the tags. This will be used to determine
                         // which images are kept by the .filter() method.
-    images=images.filter((image) =>{
+    galleryOutput=images.filter((image) =>{
         var tagsTogether=image.tags[0].value+' '; //Reinitialzing to first tag
         for(let i=0;i<image.tags.length;i++){
             
@@ -54,7 +55,7 @@ function ImGallery(props) {
     addImages();
     filterImages(props.search);
     return (
-        <Gallery images={images} />
+        <Gallery images={galleryOutput} />
     );
 }
 export default ImGallery;
