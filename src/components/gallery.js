@@ -26,6 +26,7 @@ function ImGallery() {
             .then(response => {
                 setData(response);
                 getData(response);
+                console.log(data);
                 if (doneLoading)
                     setIsLoading(false);
             }).catch(e => { console.log(e) });
