@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Gallery from 'react-grid-gallery';//https://www.npmjs.com/package/react-grid-gallery
 import testImage from '../images/testimages/science-in-hd-4pM4nhHyo9M-unsplash.jpg'
+
+
 let images = [];
-var doneLoading = false;
-function getData(data) {
-    console.log("Parsing through data");
-    for (let i = 0; i < data.length; i++) {
+let galleryOutput=[]; //This is for displaying what is output to gallery.
+async function addImages() {
+    console.log("adding images");
+    for (let i = 0; i < 67; i++) {
         images[i] = {
             src: data[i].ImageUri,
             thumbnail: data[i].ImageUri,
@@ -33,10 +35,10 @@ async function filterImages(searchFilter) {
     //let tagsTogether=''; This string will concatenate all the tags together so that using indexOf will return
     // true if the search input contains any of the tags. This will be used to determine
     // which images are kept by the .filter() method.
-    images = images.filter((image) => {
-        var tagsTogether = image.tags[0].value + ' '; //Reinitialzing to first tag
-        for (let i = 0; i < image.tags.length; i++) {
-            tagsTogether = tagsTogether.concat(image.tags[i].value + ' ');
+    galleryOutput=images.filter((image) =>{
+        var tagsTogether=image.tags[0].value+' '; //Reinitialzing to first tag
+        for(let i=0;i<image.tags.length;i++){
+            tagsTogether=tagsTogether.concat(image.tags[i].value+' ');
         }                                                                           //Separating tags by spaces so as to avoid
         //erroneously true positive returns.
         if (tagsTogether.toLowerCase().indexOf(' ' + searchFilter.toLowerCase()) >= 0) return true;
@@ -51,7 +53,6 @@ async function filterImages(searchFilter) {
 }
 
 function ImGallery(props) {
-    filterImages(props.search);
     const [isLoading, setIsLoading] = useState(true);
     const [data, setData] = useState();
     if (isLoading) {
@@ -64,11 +65,11 @@ function ImGallery(props) {
                     setIsLoading(false); //once done loading image array, then set the loading hook with false
             }).catch(e => { console.log(e) });
     }
+    filterImages(props.search); //Filtering image array based on search input
     return (
         <div>
-            {isLoading ? <p>Loading Data</p> : <Gallery images={images} />}
+            {isLoading ? <p>Loading Data</p> : <Gallery images={galleryOutput} />}
         </div>
     );
-
 }
 export default ImGallery;
