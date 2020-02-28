@@ -44,7 +44,7 @@ export default function MenuAppBar(props) {
                     </Typography>
                     <Search
                         onSearchChange={handleChange}
-                        value={props.search}
+                        //value={props.search}
                     />
                     <Button color="inherit">Login</Button>
                 </Toolbar>

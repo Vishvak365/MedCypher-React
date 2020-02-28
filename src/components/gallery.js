@@ -12,65 +12,61 @@ function getData(data) {
             thumbnailWidth: Number(data[i].imageWidth),
             thumbnailHeight: Number(data[i].imageHeight),
             caption: data[i].captions,
-            tags: [{value: data[i].tags}]
+            tags: [{ value: data[i].tags }]
         }
     }
     //Added an element with an additional tag for testing if the filtering works.
-    images[67] = {
+    images[data.length] = {
         src: "http://www.gannett-cdn.com/-mm-/d415e49dbee251019f24a0ea55f95947a2bb1072/c=29-0-425-298&r=x404&c=534x401/local/-/media/2016/01/02/DetroitFreePress/DetroitFreePress/635873333613566290-surgery-ThinkstockPhotos-470454993.jpg",
-            thumbnail: "http://www.gannett-cdn.com/-mm-/d415e49dbee251019f24a0ea55f95947a2bb1072/c=29-0-425-298&r=x404&c=534x401/local/-/media/2016/01/02/DetroitFreePress/DetroitFreePress/635873333613566290-surgery-ThinkstockPhotos-470454993.jpg",
-            thumbnailWidth: 320,
-            thumbnailHeight: 212,
-            tags: [{ value: "Scalpel" }, { value: "Stabby Thing" }, { value: "Pointy" }, {value: "cutty Thing"}, {value: "Very Sharp Knife"}],
-            caption: "This tool cuts people open"
+        thumbnail: "http://www.gannett-cdn.com/-mm-/d415e49dbee251019f24a0ea55f95947a2bb1072/c=29-0-425-298&r=x404&c=534x401/local/-/media/2016/01/02/DetroitFreePress/DetroitFreePress/635873333613566290-surgery-ThinkstockPhotos-470454993.jpg",
+        thumbnailWidth: 320,
+        thumbnailHeight: 212,
+        tags: [{ value: "Scalpel" }, { value: "Stabby Thing" }, { value: "Pointy" }, { value: "cutty Thing" }, { value: "Very Sharp Knife" }],
+        caption: "This tool cuts people open"
     }
-  doneLoading = true;
+    doneLoading = true;
 };
 
 //Filters image vector (defined above) by tag
-let tagsTogether='';
-async function filterImages(searchFilter){
+let tagsTogether = '';
+async function filterImages(searchFilter) {
     //let tagsTogether=''; This string will concatenate all the tags together so that using indexOf will return
-                        // true if the search input contains any of the tags. This will be used to determine
-                        // which images are kept by the .filter() method.
-    images=images.filter((image) =>{
-        var tagsTogether=image.tags[0].value+' '; //Reinitialzing to first tag
-        for(let i=0;i<image.tags.length;i++){
-            
-            tagsTogether=tagsTogether.concat(image.tags[i].value+' ');
+    // true if the search input contains any of the tags. This will be used to determine
+    // which images are kept by the .filter() method.
+    images = images.filter((image) => {
+        var tagsTogether = image.tags[0].value + ' '; //Reinitialzing to first tag
+        for (let i = 0; i < image.tags.length; i++) {
+            tagsTogether = tagsTogether.concat(image.tags[i].value + ' ');
         }                                                                           //Separating tags by spaces so as to avoid
-                                                                                    //erroneously true positive returns.
-        if(tagsTogether.toLowerCase().indexOf(' '+searchFilter.toLowerCase()) >=0 ) return true; //If "search" exists in tags prevent this element
-                                                                                           // from being filtered out. Note that the search
-                                                                                           // filter is appended with a space so that words
-                                                                                           // containing the filter but don't match the filter
-                                                                                           // are not returned (e.g., searching "ode" will not
-                                                                                           // return true for a tag of "cathode")
+        //erroneously true positive returns.
+        if (tagsTogether.toLowerCase().indexOf(' ' + searchFilter.toLowerCase()) >= 0) return true;
+        //If "search" exists in tags prevent this element
+        // from being filtered out. Note that the search
+        // filter is appended with a space so that words
+        // containing the filter but don't match the filter
+        // are not returned (e.g., searching "ode" will not
+        // return true for a tag of "cathode")
         else return false;  //Else return the image
     })
 }
 
 function ImGallery(props) {
-    addImages();
     filterImages(props.search);
-function ImGallery() {
     const [isLoading, setIsLoading] = useState(true);
     const [data, setData] = useState();
     if (isLoading) {
         fetch('https://medcypher.azurewebsites.net/api/data/Dr.%20Mohammad')
-            .then(res => res.json())
+            .then(res => res.json()) // converts to json
             .then(response => {
-                setData(response);
-                getData(response);
-                console.log(data);
+                setData(response); //Set the data hook with API respnose data
+                getData(response); //Populates the image array
                 if (doneLoading)
-                    setIsLoading(false);
+                    setIsLoading(false); //once done loading image array, then set the loading hook with false
             }).catch(e => { console.log(e) });
     }
     return (
         <div>
             {isLoading ? <p>Loading Data</p> : <Gallery images={images} />}
-
         </div>
     );
 
