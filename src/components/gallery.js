@@ -21,14 +21,14 @@ function getData(data) {
     }
 
     //Added an element with an additional tag for testing if the filtering works.
-    // images[data.length] = {
-    //     src: "http://www.gannett-cdn.com/-mm-/d415e49dbee251019f24a0ea55f95947a2bb1072/c=29-0-425-298&r=x404&c=534x401/local/-/media/2016/01/02/DetroitFreePress/DetroitFreePress/635873333613566290-surgery-ThinkstockPhotos-470454993.jpg",
-    //     thumbnail: "http://www.gannett-cdn.com/-mm-/d415e49dbee251019f24a0ea55f95947a2bb1072/c=29-0-425-298&r=x404&c=534x401/local/-/media/2016/01/02/DetroitFreePress/DetroitFreePress/635873333613566290-surgery-ThinkstockPhotos-470454993.jpg",
-    //     thumbnailWidth: 320,
-    //     thumbnailHeight: 212,
-    //     tags: [{ value: "Scalpel" }, { value: "Stabby Thing" }, { value: "Pointy" }, { value: "cutty Thing" }, { value: "Very Sharp Knife" }],
-    //     caption: "This tool cuts people open"
-    // }
+    images[data.length] = {
+        src: "http://www.gannett-cdn.com/-mm-/d415e49dbee251019f24a0ea55f95947a2bb1072/c=29-0-425-298&r=x404&c=534x401/local/-/media/2016/01/02/DetroitFreePress/DetroitFreePress/635873333613566290-surgery-ThinkstockPhotos-470454993.jpg",
+        thumbnail: "http://www.gannett-cdn.com/-mm-/d415e49dbee251019f24a0ea55f95947a2bb1072/c=29-0-425-298&r=x404&c=534x401/local/-/media/2016/01/02/DetroitFreePress/DetroitFreePress/635873333613566290-surgery-ThinkstockPhotos-470454993.jpg",
+        thumbnailWidth: 320,
+        thumbnailHeight: 212,
+        tags: [{ value: "Scalpel" }, { value: "Stabby Thing" }, { value: "Pointy" }, { value: "cutty Thing" }, { value: "Very Sharp Knife" }],
+        caption: "This tool cuts people open"
+    }
     doneLoading = true;
 };
 
@@ -68,10 +68,10 @@ function ImGallery(props) {
                     setIsLoading(false); //once done loading image array, then set the loading hook with false
             }).catch(e => { console.log(e) });
     }
-    //filterImages(props.search); //Filtering image array based on search input
+    filterImages(props.search); //Filtering image array based on search input
     return (
         <div>
-            {isLoading ? <p>Loading Data</p> : <Gallery images={images} />}
+            {isLoading ? <p>Loading Data</p> : <Gallery images={galleryOutput} />}
         </div>
     );
 }
