@@ -20,8 +20,16 @@ const useStyles = makeStyles(theme => ({
         flexGrow: 1,
     },
 }));
-export default function MenuAppBar() {
+
+export default function MenuAppBar(props) {
+
     const classes = useStyles();
+
+    //Handling onChange event for Search
+    const handleChange = (chgEvent) => {
+        chgEvent.preventDefault();
+        props.setSearch(chgEvent.target.value);
+    }
 
     return (
         <div className={classes.root}>
@@ -34,7 +42,10 @@ export default function MenuAppBar() {
                         MEDCYPHER
                         <img src="http://clipartmag.com/images/picture-of-stethoscope-20.png" className={classes.title} height="40px" alt="" />
                     </Typography>
-                    <Search/>
+                    <Search
+                        onSearchChange={handleChange}
+                        value={props.search}
+                    />
                     <Button color="inherit">Login</Button>
                 </Toolbar>
             </AppBar>
