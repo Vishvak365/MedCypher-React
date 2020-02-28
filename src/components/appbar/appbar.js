@@ -23,8 +23,15 @@ const useStyles = makeStyles(theme => ({
 function nullFun() {
 
 }
-export default function MenuAppBar() {
+
+export default function MenuAppBar(props) {
     const classes = useStyles();
+
+    //Handling onChange event for Search
+    const handleChange = (chgEvent) => {
+        chgEvent.preventDefault();
+        props.setSearch(chgEvent.target.value);
+    }
 
     return (
         <div className={classes.root}>
@@ -40,8 +47,9 @@ export default function MenuAppBar() {
 
                     </Typography>
                     <Search
+                        onSearchChange={handleChange}
+                        value={props.search}
                         results={nullFun}
-
                     />
                     <Button color="inherit">Login</Button>
                 </Toolbar>
