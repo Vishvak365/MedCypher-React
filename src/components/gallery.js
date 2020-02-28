@@ -1,7 +1,7 @@
 import React , { useState } from 'react';
 import Gallery from 'react-grid-gallery';//https://www.npmjs.com/package/react-grid-gallery
 import testImage from '../images/testimages/science-in-hd-4pM4nhHyo9M-unsplash.jpg'
-
+var data = "";
 
 let images = [];
 let galleryOutput=[]; //This is for displaying what is output to gallery.
@@ -63,13 +63,17 @@ function ImGallery(props) {
                 setData(response); //Set the data hook with API respnose data
                 getData(response); //Populates the image array
                 if (doneLoading)
-                    setIsLoading(false); //once done loading image array, then set the loading hook with false
+                {
+                    setIsLoading(false);
+                    document.getElementById("backend_test_data").innerHTML=JSON.stringify(response);
+                } //once done loading image array, then set the loading hook with false
             }).catch(e => { console.log(e) });
     }
     filterImages(props.search); //Filtering image array based on search input
     return (
         <div>
             {isLoading ? <p>Loading Data</p> : <Gallery images={galleryOutput} />}
+            <div id="backend_test_data">Hello</div>
         </div>
     );
 }
