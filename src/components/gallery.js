@@ -21,7 +21,7 @@ function ImGallery() {
     const [isLoading, setIsLoading] = useState(true);
     const [data, setData] = useState();
     if (isLoading) {
-        fetch('http://medcypher.azurewebsites.net/api/data/Dr.%20Mohammad')
+        fetch('https://medcypher.azurewebsites.net/api/data/Dr.%20Mohammad')
             .then(res => res.json())
             .then(response => {
                 setData(response);

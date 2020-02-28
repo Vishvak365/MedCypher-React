@@ -20,9 +20,6 @@ const useStyles = makeStyles(theme => ({
         flexGrow: 1,
     },
 }));
-function nullFun() {
-
-}
 export default function MenuAppBar() {
     const classes = useStyles();
 
@@ -36,13 +33,8 @@ export default function MenuAppBar() {
                     <Typography variant="h6" className={classes.title}>
                         MEDCYPHER
                         <img src="http://clipartmag.com/images/picture-of-stethoscope-20.png" className={classes.title} height="40px" alt="" />
-
-
                     </Typography>
-                    <Search
-                        results={nullFun}
-
-                    />
+                    <Search/>
                     <Button color="inherit">Login</Button>
                 </Toolbar>
             </AppBar>
