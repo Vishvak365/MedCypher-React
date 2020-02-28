@@ -1,12 +1,12 @@
 import React from 'react';
-import { fade, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import search, { Search } from 'semantic-ui-react';
+import { Search } from 'semantic-ui-react';
 
 
 const useStyles = makeStyles(theme => ({
@@ -20,11 +20,9 @@ const useStyles = makeStyles(theme => ({
         flexGrow: 1,
     },
 }));
-function nullFun() {
-
-}
 
 export default function MenuAppBar(props) {
+
     const classes = useStyles();
 
     //Handling onChange event for Search
@@ -41,15 +39,12 @@ export default function MenuAppBar(props) {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" className={classes.title}>
-
-                        <img src="http://clipartmag.com/images/picture-of-stethoscope-20.png" classname={classes.title} height="40px" alt="this is car image" />
                         MEDCYPHER
-
+                        <img src="http://clipartmag.com/images/picture-of-stethoscope-20.png" className={classes.title} height="40px" alt="" />
                     </Typography>
                     <Search
                         onSearchChange={handleChange}
                         value={props.search}
-                        results={nullFun}
                     />
                     <Button color="inherit">Login</Button>
                 </Toolbar>
