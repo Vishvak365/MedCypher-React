@@ -44,6 +44,7 @@ export default function MenuAppBar(props) {
                     </Typography>
                     <Search
                         onSearchChange={handleChange}
+                        showNoResults={false}
                     />
                 </Toolbar>
             </AppBar>

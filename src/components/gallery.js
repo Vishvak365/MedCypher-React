@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import Gallery from 'react-grid-gallery';//https://www.npmjs.com/package/react-grid-gallery
+import { Dimmer, Loader } from 'semantic-ui-react';
+
 let images = [];
 let galleryOutput = []; //This is for displaying what is output to gallery.
 var doneLoading = false;
@@ -69,9 +71,15 @@ function ImGallery(props) {
             }).catch(e => { console.log(e) });
     }
     filterImages(props.search); //Filtering image array based on search input
+    //if loading, show loader with dimmed background, else show the gallery with images
     return (
         <div>
-            {isLoading ? <p>Loading Data</p> : <Gallery images={galleryOutput} />}
+            {isLoading ?
+                <Dimmer active>
+                    <Loader />
+                </Dimmer> :
+                <Gallery images={galleryOutput}
+                />}
         </div>
     );
 }
