@@ -18,7 +18,10 @@ function getData(data) {
         };
         //console.log(images[0].tags);
         for (let j = 0; j < data[i].tags.length; j++) {
-            images[i].tags[j] = { value: data[i].tags[j] };
+            images[i].tags[j] = {
+                value: data[i].tags[j],
+                title: data[i].tags[j]
+            };
         }
     }
 
@@ -35,7 +38,6 @@ function getData(data) {
 };
 
 //Filters image vector (defined above) by tag
-let tagsTogether = '';
 async function filterImages(searchFilter) {
     //let tagsTogether=''; This string will concatenate all the tags together so that using indexOf will return
     // true if the search input contains any of the tags. This will be used to determine
@@ -66,6 +68,7 @@ function ImGallery(props) {
             .then(response => {
                 setData(response.data); //Set the data hook with API respnose data
                 getData(response.data); //Populates the image array
+                console.log(data);
                 if (doneLoading)
                     setIsLoading(false); //once done loading image array, then set the loading hook with false
             }).catch(e => { console.log(e) });
