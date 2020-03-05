@@ -47,11 +47,11 @@ async function filterImages(searchFilter) {
         }                                                                           //Separating tags by spaces so as to avoid
         //erroneously true positive returns.
         if (tagsTogether.toLowerCase().indexOf(' ' + searchFilter.toLowerCase()) >= 0) return true;
-        //If "search" exists in tags prevent this element
-        // from being filtered out. Note that the search
-        // filter is appended with a space so that words
-        // containing the filter but don't match the filter
-        // are not returned (e.g., searching "ode" will not
+            //If "search" exists in tags prevent this element
+            // from being filtered out. Note that the search
+            // filter is appended with a space so that words
+            // containing the filter but don't match the filter
+            // are not returned (e.g., searching "ode" will not
         // return true for a tag of "cathode")
         else return false;  //Else return the image
     })
