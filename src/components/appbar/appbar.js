@@ -7,7 +7,7 @@ import { Button, Modal } from 'semantic-ui-react'
 import IconButton from '@material-ui/core/IconButton';
 import { Search } from 'semantic-ui-react';
 import AddForm from '../add_image_form.js';
-
+import './appbar.css';
 const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
@@ -30,9 +30,14 @@ export default function MenuAppBar(props) {
     return (
         <div className={classes.root}>
             <AppBar position="static">
-                <Toolbar>
+                <Toolbar className='background'>
                     <IconButton className={classes.menuButton}>
-                        <Modal trigger={<Button color='green' icon='add' content='Add Cypher' />} centered={false}>
+                        <Modal trigger={
+                            <Button className='button'
+                                icon='add'
+                                content='Add Cypher'
+                            />
+                        } centered={false}>
                             <Modal.Content>
                                 <AddForm />
                             </Modal.Content>
@@ -44,6 +49,8 @@ export default function MenuAppBar(props) {
                     </Typography>
                     <Search
                         onSearchChange={handleChange}
+                        showNoResults={false}
+                        placeholder="Type to search..."
                     />
                 </Toolbar>
             </AppBar>
