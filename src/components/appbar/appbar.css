@@ -1,0 +1,31 @@
+.background {
+    background-color: dodgerblue;
+}
+
+.button {
+    background-color: #ffda6b !important;
+    color: dodgerblue !important;
+}
+
+/*.add {*/
+/*    background-color: #ffda6b;*/
+/*}*/
+
+/*.title {*/
+/*    height: 45px;*/
+/*    border-radius: 50px;*/
+/*    border: none;*/
+
+/*}*/
+
+/*.logo {*/
+/*    height: 50px;*/
+/*    padding-left: 10px;*/
+/*    padding-right: 5px;*/
+/*    padding-top: 20px;*/
+
+/*}*/
+
+/*.search {*/
+/*    height: 50px;*/
+/*}*/
