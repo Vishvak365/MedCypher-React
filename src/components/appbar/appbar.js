@@ -7,7 +7,8 @@ import { Button } from 'semantic-ui-react'
 //import Button from '@material-ui/core/Button';
 
 import { Search } from 'semantic-ui-react';
-
+import AddForm from '../add_image_form.js';
+import './appbar.css';
 const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
@@ -35,6 +36,7 @@ export default function MenuAppBar(props) {
             <AppBar position="static">
                 <Toolbar>
                     <Button color='green' icon='add' content='Add Cypher' onClick={handleClick} />
+
                     <Typography variant="h6" className={classes.title}>
                         MEDCYPHER
                         <img src="http://clipartmag.com/images/picture-of-stethoscope-20.png" className={classes.title} height="40px" alt="" />
@@ -42,6 +44,7 @@ export default function MenuAppBar(props) {
                     <Search
                         onSearchChange={handleChange}
                         showNoResults={false}
+                        placeholder="Type to search..."
                     />
                 </Toolbar>
             </AppBar>
