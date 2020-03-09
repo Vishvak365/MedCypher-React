@@ -3,8 +3,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import { Button, Modal } from 'semantic-ui-react'
-import IconButton from '@material-ui/core/IconButton';
+import { Button } from 'semantic-ui-react'
+//import Button from '@material-ui/core/Button';
+
 import { Search } from 'semantic-ui-react';
 import AddForm from '../add_image_form.js';
 import './appbar.css';
@@ -27,22 +28,15 @@ export default function MenuAppBar(props) {
         chgEvent.preventDefault();
         props.setSearch(chgEvent.target.value);
     }
+    const handleClick = (chgEvent) => { //Handles the linking to the admin page for Create,Update,Delete
+        window.open('http://medcypher.azurewebsites.net/Admin/Tools', '_blank');
+    }
     return (
         <div className={classes.root}>
             <AppBar position="static">
-                <Toolbar className='background'>
-                    <IconButton className={classes.menuButton}>
-                        <Modal trigger={
-                            <Button className='button'
-                                icon='add'
-                                content='Add Cypher'
-                            />
-                        } centered={false}>
-                            <Modal.Content>
-                                <AddForm />
-                            </Modal.Content>
-                        </Modal>
-                    </IconButton>
+                <Toolbar>
+                    <Button color='green' icon='add' content='Add Cypher' onClick={handleClick} />
+
                     <Typography variant="h6" className={classes.title}>
                         MEDCYPHER
                         <img src="http://clipartmag.com/images/picture-of-stethoscope-20.png" className={classes.title} height="40px" alt="" />
