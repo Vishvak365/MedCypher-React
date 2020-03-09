@@ -5,11 +5,10 @@ import ImGallery from './components/gallery.js';
 
 function App() {
   const [search, setSearch] = useState(''); //For use in filtering ImgGallery
-  const [results, setResults] = useState(); //For displaying proper number of results. Currently unused.
+  //const [results, setResults] = useState(); //For displaying proper number of results. Currently unused.
   return (
     <div className="App">
-      <MenuAppBar setSearch={setSearch} results={results} />
-      <addForm></addForm>
+      <MenuAppBar setSearch={setSearch}/>
       <ImGallery search={search}></ImGallery>
     </div>
   );
