@@ -43,8 +43,6 @@ export default function MenuAppBar(props) {
                         onSearchChange={handleChange}
                         showNoResults={false}
                     />
-                    <Button variant="contained" onClick={console.log("yeet")}>Voice</Button>
-
                 </Toolbar>
             </AppBar>
         </div >
