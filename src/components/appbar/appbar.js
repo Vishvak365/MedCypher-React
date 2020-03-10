@@ -34,7 +34,7 @@ export default function MenuAppBar(props) {
     return (
         <div className={classes.root}>
             <AppBar position="static">
-                <Toolbar>
+                <Toolbar className="background">
                     <Button color='green' icon='add' content='Add Cypher' onClick={handleClick} />
 
                     <Typography variant="h6" className={classes.title}>
