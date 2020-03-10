@@ -6,7 +6,7 @@ body {
 
   -webkit-font-smoothing: unset;
   -moz-osx-font-smoothing: auto;
-  background-color: #ffda6b;
+  /* background-color: #ffda6b; */
 }
 
 header {
