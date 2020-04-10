@@ -63,7 +63,7 @@ function ImGallery(props) {
     const [isLoading, setIsLoading] = useState(true);
     const [data, setData] = useState();
     if (isLoading) {
-        fetch('https://medcypher.azurewebsites.net/api/data/Dr.%20Mohammad')
+        fetch('https://medcypher.azurewebsites.net/api/data)
             .then(res => res.json()) // converts to json
             .then(response => {
                 setData(response.data); //Set the data hook with API respnose data
