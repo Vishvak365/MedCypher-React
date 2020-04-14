@@ -38,16 +38,55 @@ function getData(data) {
 };
 
 //Filters image vector (defined above) by tag
-async function filterImages(searchFilter) {
+async function filterImages(searchFilter, total) {
     //let tagsTogether=''; This string will concatenate all the tags together so that using indexOf will return
     // true if the search input contains any of the tags. This will be used to determine
     // which images are kept by the .filter() method.
+    searchFilter = searchFilter.toLowerCase();
+    searchFilter = searchFilter.replace(",", "");
+    searchFilter = searchFilter.trim();
+    var array1 = searchFilter.split(" ");
+    var check = true;
+
     galleryOutput = images.filter((image) => {
+        // var str = image.tags[0].value;
+        // str = str.toLowerCase();
+        // var x = searchFilter.indexOf(str);
+        
         var tagsTogether = image.tags[0].value + ' '; //Reinitialzing to first tag
         for (let i = 0; i < image.tags.length; i++) {
             tagsTogether = tagsTogether.concat(image.tags[i].value + ' ');
-        }                                                                           //Separating tags by spaces so as to avoid
+        }
+        tagsTogether = tagsTogether.toLocaleLowerCase();  
+        // if (searchFilter != "")
+        // for (let i = 0; i < image.tags.length; i++) {
+        //     // for (let j = 0; j < array1.length; j++)
+        //     // {
+        //     //     if (image.tags[i].value != array1[j])
+        //     //     {
+        //     //         check = false;
+        //     //     }
+        //     //     else { check = true; break;}
+        //     // }
+        //     if ((tagsTogether.indexOf(array1[i].toLowerCase() < 0) && searchFilter != "" ))
+        //     {
+        //         check = false;
+        //     }
+        //     else 
+        //     {
+        //         check = true;
+        //     }
+        // }   
+
+                                                                                 //Separating tags by spaces so as to avoid
         //erroneously true positive returns.
+        // image.thumbnailHeight = image.thumbnailHeight*(total - galleryOutput.length);
+        // image.thumbnailWidth = image.thumbnailWidth*(total - galleryOutput.length);
+        // if (images.length ==1 )
+        // {
+        //     image.thumbnailWidth = 1000; //image.imageWidth;
+        //     image.thumbnailHeight = image.imageHeight;
+        // }
         if (tagsTogether.toLowerCase().indexOf(' ' + searchFilter.toLowerCase()) >= 0) return true;
             //If "search" exists in tags prevent this element
             // from being filtered out. Note that the search
@@ -55,7 +94,13 @@ async function filterImages(searchFilter) {
             // containing the filter but don't match the filter
             // are not returned (e.g., searching "ode" will not
         // return true for a tag of "cathode")
-        else return false;  //Else return the image
+        
+        else {
+        
+        return false;  //Else return the image
+        } 
+        
+        //return check;
     })
 }
 
@@ -73,7 +118,29 @@ function ImGallery(props) {
                     setIsLoading(false); //once done loading image array, then set the loading hook with false
             }).catch(e => { console.log(e) });
     }
-    filterImages(props.search); //Filtering image array based on search input
+    var total;
+    var rows = undefined;
+    filterImages(props.search, total); //Filtering image array based on search input
+    if (galleryOutput.length == 1)
+    {total = galleryOutput[0].thumbnailHeight;
+    }
+    
+    else if (galleryOutput.length < images.length*0.25 && galleryOutput.length != 0)
+    {total = 500;
+    }
+    else if (galleryOutput.length < images.length*0.5 && galleryOutput.length != 0)
+    {total = 300;
+    }
+    else {total = 180;}
+
+    
+
+    // galleryOutput = images.filter((image) => {
+    //     image.thumbnailHeight = image.thumbnailHeight*(data.length - galleryOutput.length);
+    //     image.thumbnailWidth = image.thumbnailWidth*(data.length - galleryOutput.length);
+
+    //     return true;
+    // })
     //if loading, show loader with dimmed background, else show the gallery with images
     return (
         <div>
@@ -81,7 +148,7 @@ function ImGallery(props) {
                 <Dimmer active>
                     <Loader />
                 </Dimmer> :
-                <Gallery images={galleryOutput}
+                <Gallery images={galleryOutput} rowHeight = {total} margin = {3}
                 />}
         </div>
     );

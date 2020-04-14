@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, StyleSheet } from 'react';
 import './App.css';
 import MenuAppBar from './components/appbar/appbar.js';
 import ImGallery from './components/gallery.js';
@@ -9,8 +9,11 @@ function App() {
   return (
     <div className="App">
       <MenuAppBar setSearch={setSearch}/>
+      <div style = { {flex: 1, frameBorder : 1, }}> 
       <ImGallery search={search}></ImGallery>
+      </div>
     </div>
+  
   );
 }
 
