@@ -47,36 +47,46 @@ async function filterImages(searchFilter, total) {
     searchFilter = searchFilter.trim();
     var array1 = searchFilter.split(" ");
     var check = true;
+    var match = 0;
 
     galleryOutput = images.filter((image) => {
+       
         // var str = image.tags[0].value;
         // str = str.toLowerCase();
         // var x = searchFilter.indexOf(str);
         
-        var tagsTogether = image.tags[0].value + ' '; //Reinitialzing to first tag
-        for (let i = 0; i < image.tags.length; i++) {
-            tagsTogether = tagsTogether.concat(image.tags[i].value + ' ');
-        }
-        tagsTogether = tagsTogether.toLocaleLowerCase();  
-        // if (searchFilter != "")
+        // var tagsTogether = image.tags[0].value + ' '; //Reinitialzing to first tag
         // for (let i = 0; i < image.tags.length; i++) {
-        //     // for (let j = 0; j < array1.length; j++)
-        //     // {
-        //     //     if (image.tags[i].value != array1[j])
-        //     //     {
-        //     //         check = false;
-        //     //     }
-        //     //     else { check = true; break;}
-        //     // }
-        //     if ((tagsTogether.indexOf(array1[i].toLowerCase() < 0) && searchFilter != "" ))
-        //     {
-        //         check = false;
-        //     }
-        //     else 
-        //     {
-        //         check = true;
-        //     }
-        // }   
+        //     tagsTogether = tagsTogether.concat(image.tags[i].value + ' ');
+        // }
+        // tagsTogether = tagsTogether.toLocaleLowerCase();  
+        match = 0;
+        if (searchFilter === "") {return true;}
+        for (let i = 0; i < array1.length; i++) {
+            for (let j = 0; j < image.tags.length; j++)
+            {
+                if (image.tags[j].value.toLowerCase().indexOf(array1[i].toLowerCase()) >= 0)
+                {
+                    match = match +1;
+                }
+            }
+            // if ((tagsTogether.indexOf(array1[i].toLowerCase() < 0) && searchFilter != "" ))
+            // {
+            //     check = false;
+            // }
+            // else 
+            // {
+            //     check = true;
+            // }
+        } 
+        if (match <= image.tags.length && match !== 0)
+        {
+            if (match < array1.length)
+            {return false;}
+            return true;
+        }
+        return false   
+
 
                                                                                  //Separating tags by spaces so as to avoid
         //erroneously true positive returns.
@@ -87,7 +97,7 @@ async function filterImages(searchFilter, total) {
         //     image.thumbnailWidth = 1000; //image.imageWidth;
         //     image.thumbnailHeight = image.imageHeight;
         // }
-        if (tagsTogether.toLowerCase().indexOf(' ' + searchFilter.toLowerCase()) >= 0) return true;
+        //if (tagsTogether.toLowerCase().indexOf(' ' + searchFilter.toLowerCase()) >= 0) return true;
             //If "search" exists in tags prevent this element
             // from being filtered out. Note that the search
             // filter is appended with a space so that words
@@ -95,10 +105,10 @@ async function filterImages(searchFilter, total) {
             // are not returned (e.g., searching "ode" will not
         // return true for a tag of "cathode")
         
-        else {
+       // else {
         
-        return false;  //Else return the image
-        } 
+        // return false;  //Else return the image
+        // } 
         
         //return check;
     })
@@ -121,14 +131,14 @@ function ImGallery(props) {
     var total;
     var rows = undefined;
     filterImages(props.search, total); //Filtering image array based on search input
-    if (galleryOutput.length == 1)
+    if (galleryOutput.length === 1)
     {total = galleryOutput[0].thumbnailHeight;
     }
     
-    else if (galleryOutput.length < images.length*0.25 && galleryOutput.length != 0)
+    else if (galleryOutput.length < images.length*0.25 && galleryOutput.length !== 0)
     {total = 500;
     }
-    else if (galleryOutput.length < images.length*0.5 && galleryOutput.length != 0)
+    else if (galleryOutput.length < images.length*0.5 && galleryOutput.length !== 0)
     {total = 300;
     }
     else {total = 180;}
